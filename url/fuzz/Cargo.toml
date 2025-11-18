@@ -22,5 +22,5 @@ path = "fuzz_targets/parse.rs"
 name = "fuzz-url"
 path = "fuzz_targets/fuzz-url.rs"
 
-[workspace]
+#[workspace]
 members = ["."]

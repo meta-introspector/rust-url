@@ -14,7 +14,7 @@ categories = ["parser-implementations", "web-programming", "encoding", "no-std"]
 license = "MIT OR Apache-2.0"
 include = ["src/**/*", "LICENSE-*", "README.md", "tests/**"]
 edition = "2018"
-rust-version = "1.63" # From libc
+# rust-version = "1.63" # From libc
 
 [dev-dependencies]
 serde = "1.0"
