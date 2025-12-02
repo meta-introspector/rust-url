@@ -781,8 +781,8 @@ impl Uts46 {
         ascii_sink: Option<&mut W>,
     ) -> Result<ProcessingSuccess, ProcessingError> {
         let fail_fast = error_policy == ErrorPolicy::FailFast;
-        let mut domain_buffer = SmallVec::<[char; 253]>::new();
-        let mut already_punycode = SmallVec::<[AlreadyAsciiLabel; 8]>::new();
+        let mut domain_buffer = SmallVec::<char, 253>::new();
+        let mut already_punycode = SmallVec::<AlreadyAsciiLabel, 8>::new();
         // `process_inner` could be pasted inline here, but it's out of line in order
         // to avoid duplicating that code when monomorphizing over `W` and `OutputUnicode`.
         let (passthrough_up_to, is_bidi, had_errors) = self.process_inner(
@@ -1052,8 +1052,8 @@ impl Uts46 {
         ascii_deny_list: AsciiDenyList,
         hyphens: Hyphens,
         fail_fast: bool,
-        domain_buffer: &mut SmallVec<[char; 253]>,
-        already_punycode: &mut SmallVec<[AlreadyAsciiLabel<'a>; 8]>,
+        domain_buffer: &mut SmallVec<char, 253>,
+        already_punycode: &mut SmallVec<AlreadyAsciiLabel<'a>, 8>,
     ) -> (usize, bool, bool) {
         // Sadly, this even faster-path ASCII tier is needed to avoid regressing
         // performance.
@@ -1096,7 +1096,7 @@ impl Uts46 {
         ascii_deny_list: AsciiDenyList,
         hyphens: Hyphens,
         fail_fast: bool,
-        domain_buffer: &mut SmallVec<[char; 253]>,
+        domain_buffer: &mut SmallVec<char, 253>,
         already_punycode: &mut SmallVec<[AlreadyAsciiLabel<'a>; 8]>,
         tail: &'a [u8],
     ) -> (usize, bool, bool) {
@@ -1157,7 +1157,7 @@ impl Uts46 {
                             {
                                 // 63 ASCII characters is the max length for a valid DNS label and xn-- takes 4
                                 // characters.
-                                let mut label_buffer = SmallVec::<[char; 59]>::new();
+                                let mut label_buffer = SmallVec::<char, 59>::new();
                                 label_buffer.extend(decode);
 
                                 if self.after_punycode_decode(
@@ -1316,7 +1316,7 @@ impl Uts46 {
                                         needs_contextj_check = true;
                                         // 63 ASCII characters is the max length for a valid DNS label and xn-- takes 4
                                         // characters.
-                                        let mut label_buffer = SmallVec::<[char; 59]>::new();
+                                        let mut label_buffer = SmallVec::<char, 59>::new();
                                         label_buffer.extend(decode);
 
                                         domain_buffer.truncate(current_label_start);
@@ -1496,7 +1496,7 @@ impl Uts46 {
     #[inline(never)]
     fn after_punycode_decode(
         &self,
-        domain_buffer: &mut SmallVec<[char; 253]>,
+        domain_buffer: &mut SmallVec<char, 253>,
         current_label_start: usize,
         label_buffer: &[char],
         deny_list_deny_dot: u128,

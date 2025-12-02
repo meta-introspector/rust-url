@@ -158,7 +158,7 @@ impl PunycodeCodeUnit for char {
 
 #[derive(Default)]
 pub(crate) struct Decoder {
-    insertions: smallvec::SmallVec<[(usize, char); 59]>,
+    insertions: smallvec::SmallVec<(usize, char), 59>,
 }
 
 impl Decoder {
