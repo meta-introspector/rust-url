@@ -1097,7 +1097,7 @@ impl Uts46 {
         hyphens: Hyphens,
         fail_fast: bool,
         domain_buffer: &mut SmallVec<char, 253>,
-        already_punycode: &mut SmallVec<[AlreadyAsciiLabel<'a>; 8]>,
+        already_punycode: &mut SmallVec<AlreadyAsciiLabel<'a>, 8>,
         tail: &'a [u8],
     ) -> (usize, bool, bool) {
         let deny_list = ascii_deny_list.bits;
